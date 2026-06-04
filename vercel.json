@@ -1,1 +1,11 @@
-{}
+{
+  "outputDirectory": ".",
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "api/ask-ai.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/ask-ai", "dest": "api/ask-ai.js" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
