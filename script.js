@@ -138,24 +138,35 @@ document.addEventListener('DOMContentLoaded', function() {
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
 
-    // Function to call our Vercel serverless API
     async function callOpenRouterAPI(question) {
         try {
-            const response = await fetch('/api/ask-ai', {
+            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
                 headers: {
+                    'Authorization': 'Bearer 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',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ question })
+                body: JSON.stringify({
+                    model: 'nvidia/llama-3.1-nemotron-nano-8b-v1:free',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are an AI assistant specialized in explaining artificial intelligence concepts. Provide clear, concise, and accurate answers about AI. Keep responses under 200 words unless specifically asked for more detail.'
+                        },
+                        { role: 'user', content: question }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || `API request failed with status ${response.status}`);
+                throw new Error(errorData.error || `API service error: ${response.status}`);
             }
 
             const data = await response.json();
-            return data.answer;
+            return data.choices[0].message.content.trim();
         } catch (error) {
             console.error('Error calling AI API:', error);
             return "Sorry, I encountered an error while processing your question. Please try again.";
