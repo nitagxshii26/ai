@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding AI - Artificial Intelligence Explained</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI Explained</div>
+            <ul class="nav-links">
+                <li><a href="#what-is-ai">What is AI?</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#types">Types of AI</a></li>
+                <li><a href="#applications">Applications</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Understanding Artificial Intelligence</h1>
+                <p>Demystifying the technology that's changing our world</p>
+            </div>
+        </section>
+
+        <section id="what-is-ai" class="content-section">
+            <h2>What is Artificial Intelligence?</h2>
+            <p>Artificial Intelligence (AI) refers to computer systems designed to perform tasks that typically require human intelligence. These tasks include learning, reasoning, problem-solving, perception, and language understanding.</p>
+
+            <div class="ai-definition">
+                <h3>Key Characteristics of AI:</h3>
+                <ul>
+                    <li><strong>Learning:</strong> Ability to acquire information and rules for using it</li>
+                    <li><strong>Reasoning:</strong> Using rules to reach approximate or definite conclusions</li>
+                    <li><strong>Problem-solving:</strong> Finding solutions to complex challenges</li>
+                    <li><strong>Perception:</strong> Ability to process and understand visual and audio inputs</li>
+                    <li><strong>Language understanding:</strong> Comprehending and generating human language</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="content-section">
+            <h2>How Does AI Work?</h2>
+            <p>AI systems work by combining large amounts of data with fast, iterative processing and intelligent algorithms, allowing the software to automatically learn from patterns or features in the data.</p>
+
+            <div class="ai-process">
+                <h3>Basic AI Process:</h3>
+                <ol>
+                    <li><strong>Data Input:</strong> AI systems ingest vast amounts of relevant data</li>
+                    <li><strong>Processing:</strong> Algorithms analyze the data to find patterns</li>
+                    <li><strong>Learning:</strong> The system learns from the patterns and makes predictions</li>
+                    <li><strong>Feedback:</strong> Results are measured for accuracy and the system adjusts</li>
+                    <li><strong>Application:</strong> The refined algorithm is used to make decisions</li>
+                </ol>
+            </div>
+
+            <div class="ai-types">
+                <h3>Core Technologies:</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>Machine Learning</h4>
+                        <p>Algorithms that improve automatically through experience</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Neural Networks</h4>
+                        <p>Systems modeled after the human brain's network of neurons</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Deep Learning</h4>
+                        <p>Neural networks with multiple layers for complex pattern recognition</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Natural Language Processing</h4>
+                        <p>Enabling computers to understand and interpret human language</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="types" class="content-section">
+            <h2>Types of AI</h2>
+            <div class="ai-types-grid">
+                <div class="ai-type">
+                    <h3>Narrow AI (ANI)</h3>
+                    <p>Designed for specific tasks (e.g., Siri, Alexa, self-driving cars)</p>
+                </div>
+                <div class="ai-type">
+                    <h3>General AI (AGI)</h3>
+                    <p>Hypothetical AI with human-level intelligence across all domains</p>
+                </div>
+                <div class="ai-type">
+                    <h3>Superintelligence (ASI)</h3>
+                    <p>Hypothetical AI that surpasses human intelligence in all aspects</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="applications" class="content-section">
+            <h2>AI Applications in Daily Life</h2>
+            <div class="applications-grid">
+                <div class="application">
+                    <h4>Virtual Assistants</h4>
+                    <p>Siri, Alexa, Google Assistant</p>
+                </div>
+                <div class="application">
+                    <h4>Recommendation Systems</h4>
+                    <p>Netflix, Spotify, Amazon suggestions</p>
+                </div>
+                <div class="application">
+                    <h4>Image Recognition</h4>
+                    <p>Facial recognition, medical imaging</p>
+                </div>
+                <div class="application">
+                    <h4>Autonomous Vehicles</h4>
+                    <p>Self-driving cars and drones</p>
+                </div>
+                <div class="application">
+                    <h4>Healthcare</h4>
+                    <p>Disease diagnosis, drug discovery</p>
+                </div>
+                <div class="application">
+                    <h4>Finance</h4>
+                    <p>Fraud detection, algorithmic trading</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ask-ai" class="content-section">
+            <h2>Ask the AI</h2>
+            <p>Have a question about artificial intelligence? Ask our AI assistant below!</p>
+
+            <div class="ai-chat-container">
+                <div class="chat-history" id="chatHistory">
+                    <div class="message ai-message">
+                        <strong>AI Assistant:</strong>
+                        <p>Hello! I'm here to help answer your questions about artificial intelligence. What would you like to know?</p>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <textarea id="userQuestion" placeholder="Ask a question about AI..." rows="3"></textarea>
+                    <button id="askButton">Ask AI</button>
+                </div>
+
+                <div class="loading" id="loadingIndicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>AI is thinking...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AI Explained. Understanding the future today.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
