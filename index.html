@@ -4,7 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Understanding AI - Artificial Intelligence Explained</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --accent-color: #bb86fc;
+            --accent-color-hover: #d0a6ff;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--darker-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--accent-color); }
+
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
+        .nav-links a.active { color: var(--accent-color); }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(187,134,252,0.1) 0%, rgba(30,30,30,0.1) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-color), #03dac6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .content-section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .content-section.animate-in { opacity: 1; transform: translateY(0); }
+
+        .content-section h2 { font-size: 2.2rem; margin-bottom: 1.5rem; color: var(--accent-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        .content-section h3 { font-size: 1.5rem; margin: 1.5rem 0 1rem; color: #03dac6; }
+        .content-section p { margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-secondary); }
+        .content-section ul, .content-section ol { margin-left: 2rem; margin-bottom: 1.5rem; }
+        .content-section li { margin-bottom: 0.8rem; font-size: 1.1rem; }
+        .content-section strong { color: var(--text-primary); }
+
+        .ai-definition { background-color: rgba(187,134,252,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color); margin: 2rem 0; }
+        .ai-process { background-color: rgba(3,218,198,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #03dac6; margin: 2rem 0; }
+
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .tech-item { background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .tech-item:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        .tech-item h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
+
+        .ai-types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .ai-type { background: linear-gradient(135deg, var(--card-bg) 0%, rgba(30,30,30,0.8) 100%); padding: 2rem; border-radius: 10px; text-align: center; border: 1px solid var(--border-color); cursor: pointer; }
+        .ai-type h3 { color: var(--accent-color); margin-bottom: 1rem; }
+
+        .applications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .application { background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; text-align: center; transition: all 0.3s; cursor: pointer; }
+        .application:hover { background-color: rgba(187,134,252,0.1); transform: scale(1.03); }
+        .application h4 { color: #03dac6; margin-bottom: 0.5rem; }
+
+        .highlighted { background-color: rgba(187,134,252,0.2) !important; transform: scale(1.02) !important; transition: all 0.3s ease !important; }
+
+        .ai-chat-container { margin-top: 2rem; }
+
+        .chat-history { max-height: 400px; overflow-y: auto; padding: 1rem; background-color: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 1rem; }
+
+        .message { padding: 1rem; margin-bottom: 1rem; border-radius: 8px; }
+        .user-message { background-color: rgba(187,134,252,0.1); border-left: 3px solid var(--accent-color); }
+        .ai-message { background-color: rgba(3,218,198,0.1); border-left: 3px solid #03dac6; }
+        .message strong { display: block; margin-bottom: 0.5rem; color: var(--accent-color); }
+
+        .chat-input-container { display: flex; gap: 1rem; margin-bottom: 1rem; }
+
+        #userQuestion { flex: 1; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-primary); font-family: inherit; resize: vertical; }
+        #userQuestion:focus { outline: none; border-color: var(--accent-color); }
+
+        #askButton { padding: 0 2rem; background-color: var(--accent-color); color: var(--dark-bg); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+        #askButton:hover { background-color: var(--accent-color-hover); }
+        #askButton:disabled { background-color: var(--text-secondary); cursor: not-allowed; }
+
+        .loading { text-align: center; padding: 1rem; }
+        .spinner { border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--accent-color); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        footer { background-color: var(--darker-bg); text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 1rem; }
+            .nav-links { margin-top: 1rem; }
+            .nav-links li { margin: 0 1rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero { padding: 3rem 1rem; }
+            main { padding: 1rem; }
+            .content-section { padding: 1.5rem; }
+            .tech-grid, .ai-types-grid, .applications-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .nav-links li { margin: 0.5rem; }
+            .hero-content h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,7 +176,6 @@
         <section id="what-is-ai" class="content-section">
             <h2>What is Artificial Intelligence?</h2>
             <p>Artificial Intelligence (AI) refers to computer systems designed to perform tasks that typically require human intelligence. These tasks include learning, reasoning, problem-solving, perception, and language understanding.</p>
-
             <div class="ai-definition">
                 <h3>Key Characteristics of AI:</h3>
                 <ul>
@@ -46,7 +191,6 @@
         <section id="how-it-works" class="content-section">
             <h2>How Does AI Work?</h2>
             <p>AI systems work by combining large amounts of data with fast, iterative processing and intelligent algorithms, allowing the software to automatically learn from patterns or features in the data.</p>
-
             <div class="ai-process">
                 <h3>Basic AI Process:</h3>
                 <ol>
@@ -57,26 +201,13 @@
                     <li><strong>Application:</strong> The refined algorithm is used to make decisions</li>
                 </ol>
             </div>
-
             <div class="ai-types">
                 <h3>Core Technologies:</h3>
                 <div class="tech-grid">
-                    <div class="tech-item">
-                        <h4>Machine Learning</h4>
-                        <p>Algorithms that improve automatically through experience</p>
-                    </div>
-                    <div class="tech-item">
-                        <h4>Neural Networks</h4>
-                        <p>Systems modeled after the human brain's network of neurons</p>
-                    </div>
-                    <div class="tech-item">
-                        <h4>Deep Learning</h4>
-                        <p>Neural networks with multiple layers for complex pattern recognition</p>
-                    </div>
-                    <div class="tech-item">
-                        <h4>Natural Language Processing</h4>
-                        <p>Enabling computers to understand and interpret human language</p>
-                    </div>
+                    <div class="tech-item"><h4>Machine Learning</h4><p>Algorithms that improve automatically through experience</p></div>
+                    <div class="tech-item"><h4>Neural Networks</h4><p>Systems modeled after the human brain's network of neurons</p></div>
+                    <div class="tech-item"><h4>Deep Learning</h4><p>Neural networks with multiple layers for complex pattern recognition</p></div>
+                    <div class="tech-item"><h4>Natural Language Processing</h4><p>Enabling computers to understand and interpret human language</p></div>
                 </div>
             </div>
         </section>
@@ -84,55 +215,27 @@
         <section id="types" class="content-section">
             <h2>Types of AI</h2>
             <div class="ai-types-grid">
-                <div class="ai-type">
-                    <h3>Narrow AI (ANI)</h3>
-                    <p>Designed for specific tasks (e.g., Siri, Alexa, self-driving cars)</p>
-                </div>
-                <div class="ai-type">
-                    <h3>General AI (AGI)</h3>
-                    <p>Hypothetical AI with human-level intelligence across all domains</p>
-                </div>
-                <div class="ai-type">
-                    <h3>Superintelligence (ASI)</h3>
-                    <p>Hypothetical AI that surpasses human intelligence in all aspects</p>
-                </div>
+                <div class="ai-type"><h3>Narrow AI (ANI)</h3><p>Designed for specific tasks (e.g., Siri, Alexa, self-driving cars)</p></div>
+                <div class="ai-type"><h3>General AI (AGI)</h3><p>Hypothetical AI with human-level intelligence across all domains</p></div>
+                <div class="ai-type"><h3>Superintelligence (ASI)</h3><p>Hypothetical AI that surpasses human intelligence in all aspects</p></div>
             </div>
         </section>
 
         <section id="applications" class="content-section">
             <h2>AI Applications in Daily Life</h2>
             <div class="applications-grid">
-                <div class="application">
-                    <h4>Virtual Assistants</h4>
-                    <p>Siri, Alexa, Google Assistant</p>
-                </div>
-                <div class="application">
-                    <h4>Recommendation Systems</h4>
-                    <p>Netflix, Spotify, Amazon suggestions</p>
-                </div>
-                <div class="application">
-                    <h4>Image Recognition</h4>
-                    <p>Facial recognition, medical imaging</p>
-                </div>
-                <div class="application">
-                    <h4>Autonomous Vehicles</h4>
-                    <p>Self-driving cars and drones</p>
-                </div>
-                <div class="application">
-                    <h4>Healthcare</h4>
-                    <p>Disease diagnosis, drug discovery</p>
-                </div>
-                <div class="application">
-                    <h4>Finance</h4>
-                    <p>Fraud detection, algorithmic trading</p>
-                </div>
+                <div class="application"><h4>Virtual Assistants</h4><p>Siri, Alexa, Google Assistant</p></div>
+                <div class="application"><h4>Recommendation Systems</h4><p>Netflix, Spotify, Amazon suggestions</p></div>
+                <div class="application"><h4>Image Recognition</h4><p>Facial recognition, medical imaging</p></div>
+                <div class="application"><h4>Autonomous Vehicles</h4><p>Self-driving cars and drones</p></div>
+                <div class="application"><h4>Healthcare</h4><p>Disease diagnosis, drug discovery</p></div>
+                <div class="application"><h4>Finance</h4><p>Fraud detection, algorithmic trading</p></div>
             </div>
         </section>
 
         <section id="ask-ai" class="content-section">
             <h2>Ask the AI</h2>
             <p>Have a question about artificial intelligence? Ask our AI assistant below!</p>
-
             <div class="ai-chat-container">
                 <div class="chat-history" id="chatHistory">
                     <div class="message ai-message">
@@ -140,12 +243,10 @@
                         <p>Hello! I'm here to help answer your questions about artificial intelligence. What would you like to know?</p>
                     </div>
                 </div>
-
                 <div class="chat-input-container">
                     <textarea id="userQuestion" placeholder="Ask a question about AI..." rows="3"></textarea>
                     <button id="askButton">Ask AI</button>
                 </div>
-
                 <div class="loading" id="loadingIndicator" style="display: none;">
                     <div class="spinner"></div>
                     <p>AI is thinking...</p>
@@ -158,6 +259,104 @@
         <p>&copy; 2026 AI Explained. Understanding the future today.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // Active nav on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            document.querySelectorAll('.content-section').forEach(section => {
+                if (pageYOffset >= section.offsetTop - 100) current = section.getAttribute('id');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // Animate sections on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('animate-in'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.content-section').forEach(s => observer.observe(s));
+
+        // Highlight on click
+        document.querySelectorAll('.tech-item, .ai-type, .application').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.tech-item, .ai-type, .application').forEach(i => i.classList.remove('highlighted'));
+                this.classList.add('highlighted');
+                setTimeout(() => this.classList.remove('highlighted'), 2000);
+            });
+        });
+
+        // AI Chat
+        const chatHistory = document.getElementById('chatHistory');
+        const userQuestion = document.getElementById('userQuestion');
+        const askButton = document.getElementById('askButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        function addMessage(role, content) {
+            const div = document.createElement('div');
+            div.classList.add('message', role === 'user' ? 'user-message' : 'ai-message');
+            const strong = document.createElement('strong');
+            strong.textContent = role === 'user' ? 'You:' : 'AI Assistant:';
+            const p = document.createElement('p');
+            p.textContent = content;
+            div.appendChild(strong);
+            div.appendChild(p);
+            chatHistory.appendChild(div);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        async function callAI(question) {
+            const response = await fetch('https://xwhxaxrmgspihrpvnjsd.supabase.co/functions/v1/ask-ai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aHhheHJtZ3NwaWhycHZuanNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDM4MTgsImV4cCI6MjA5NjE3OTgxOH0.s3C6EmGQSNbsG040i5ds4w1-FnNin-2DqQSoymT7eZo',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aHhheHJtZ3NwaWhycHZuanNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDM4MTgsImV4cCI6MjA5NjE3OTgxOH0.s3C6EmGQSNbsG040i5ds4w1-FnNin-2DqQSoymT7eZo'
+                },
+                body: JSON.stringify({ question })
+            });
+
+            if (!response.ok) throw new Error('API error: ' + response.status);
+            const data = await response.json();
+            return data.answer;
+        }
+
+        askButton.addEventListener('click', async function() {
+            const question = userQuestion.value.trim();
+            if (!question) return;
+
+            addMessage('user', question);
+            userQuestion.value = '';
+            loadingIndicator.style.display = 'block';
+            askButton.disabled = true;
+
+            try {
+                const answer = await callAI(question);
+                addMessage('ai', answer);
+            } catch (error) {
+                addMessage('ai', 'Sorry, I encountered an error. Please try again.');
+            } finally {
+                loadingIndicator.style.display = 'none';
+                askButton.disabled = false;
+            }
+        });
+
+        userQuestion.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
+                e.preventDefault();
+                askButton.click();
+            }
+        });
+    </script>
 </body>
 </html>
