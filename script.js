@@ -140,24 +140,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function callOpenRouterAPI(question) {
         try {
-            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            const response = await fetch('/api/ask-ai', {
                 method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer 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',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: 'nvidia/llama-3.1-nemotron-nano-8b-v1:free',
-                    messages: [
-                        {
-                            role: 'system',
-                            content: 'You are an AI assistant specialized in explaining artificial intelligence concepts. Provide clear, concise, and accurate answers about AI. Keep responses under 200 words unless specifically asked for more detail.'
-                        },
-                        { role: 'user', content: question }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 500
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question })
             });
 
             if (!response.ok) {
@@ -166,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = await response.json();
-            return data.choices[0].message.content.trim();
+            return data.answer;
         } catch (error) {
             console.error('Error calling AI API:', error);
             return "Sorry, I encountered an error while processing your question. Please try again.";
