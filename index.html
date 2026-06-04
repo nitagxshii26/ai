@@ -318,11 +318,7 @@
         async function callAI(question) {
             const response = await fetch('https://xwhxaxrmgspihrpvnjsd.supabase.co/functions/v1/ask-ai', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aHhheHJtZ3NwaWhycHZuanNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDM4MTgsImV4cCI6MjA5NjE3OTgxOH0.s3C6EmGQSNbsG040i5ds4w1-FnNin-2DqQSoymT7eZo',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aHhheHJtZ3NwaWhycHZuanNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MDM4MTgsImV4cCI6MjA5NjE3OTgxOH0.s3C6EmGQSNbsG040i5ds4w1-FnNin-2DqQSoymT7eZo'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ question })
             });
 
